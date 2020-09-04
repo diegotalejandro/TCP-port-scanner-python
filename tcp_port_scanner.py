@@ -12,9 +12,10 @@ def scanner(puerto_destino):
     dport=puerto_destino, flags="S"), timeout=10) #Envio Paquete TCP con el flag S y un timeout de 10
     #En caso de no recibir respuesta, definimos que el puerto esta filtrado al no recibir un RST
     if(str(type(respuesta_paquete_tcp)) == "<class 'NoneType'>"):
-        print("Filtrado")
-    #Caso contrario, puede existir un paquete con dos tipos flags, los cuales corresponden a abierto o filtrado
+        print("Filtrado")    
+    #Se revisa si es un paquete TCP
     elif(respuesta_paquete_tcp.haslayer(TCP)):
+        #En este caso el flag es un SYN + ACK, los cuales corresponden a abierto
         if(respuesta_paquete_tcp.getlayer(TCP).flags == 0x12):        
             send_rst = sr(IP(dst=ip_destino)/TCP(sport=puerto_origen,
             dport=puerto_destino, flags="R"), timeout=10)
