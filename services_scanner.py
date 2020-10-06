@@ -12,7 +12,7 @@ def obtenerBanner(ip,puerto):
 
 if __name__ == '__main__':
     ip_destino = "10.0.2.4"
-    lista_puerto_destino = [21,22,25,2121,1524]
+    lista_puerto_destino = [21,22,1524,2121,3306]
     for puerto_destino in lista_puerto_destino:
 	print("Puerto: " + str(puerto_destino))
     	obtenerBanner(ip_destino,puerto_destino)
